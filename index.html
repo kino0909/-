@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f3eb">
+  <meta name="description" content="千葉県習志野市・京成大久保の街歩きガイド。ゆうロードやプラッツ習志野、菜々の湯など周辺の見どころをご紹介します。">
+  <title>おおくぼ日和 | 千葉・習志野の街歩き案内</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #263b32;
+      --muted: #747b70;
+      --paper: #f6f3eb;
+      --panel: #fffdf7;
+      --line: #deded1;
+      --green: #34634c;
+      --light-green: #dce8d9;
+      --orange: #d7794d;
+      --display: "DM Sans", "Noto Sans JP", sans-serif;
+      --body: "Noto Sans JP", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--body);
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; }
+    .wrap { width: min(1120px, calc(100% - 48px)); margin-inline: auto; }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--green);
+      font: 700 11px/1 var(--display);
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before { width: 7px; height: 7px; border-radius: 50%; background: var(--orange); content: ""; }
+
+    header {
+      position: absolute;
+      z-index: 3;
+      inset: 0 0 auto;
+      border-bottom: 1px solid rgba(255,255,255,.3);
+      color: #fffdf7;
+    }
+    .nav { height: 78px; display: flex; align-items: center; justify-content: space-between; }
+    .brand { display: flex; align-items: center; gap: 11px; font: 800 16px/1 var(--display); letter-spacing: -.04em; }
+    .brand-mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.75);
+      border-radius: 50%;
+      color: #fffdf7;
+      font: 700 15px/1 var(--display);
+    }
+    .brand span:last-child span { color: #e6bd84; }
+    .nav-links { display: flex; align-items: center; gap: 31px; color: rgba(255,253,247,.9); font-size: 12px; font-weight: 600; }
+    .nav-links a:not(.nav-cta):hover { color: #e6bd84; }
+    .nav-cta { padding: 11px 15px; border: 1px solid rgba(255,255,255,.65); border-radius: 2px; transition: background .2s, color .2s; }
+    .nav-cta:hover { background: #fffdf7; color: var(--ink); }
+    .menu-toggle { display: none; }
+
+    .hero {
+      position: relative;
+      display: flex;
+      min-height: 690px;
+      align-items: center;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(28,48,39,.88) 0%, rgba(28,48,39,.66) 43%, rgba(28,48,39,.12) 100%),
+        linear-gradient(0deg, var(--paper) 0%, transparent 18%),
+        url("https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=85") center 48% / cover;
+    }
+    .hero-content { position: relative; z-index: 1; padding-top: 55px; color: #fffdf7; }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 23px;
+      padding: 9px 12px;
+      border: 1px solid rgba(255,253,247,.5);
+      color: #fffdf7;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .1em;
+    }
+    .hero-tag span { color: #e6bd84; font-size: 14px; }
+    h1 { margin: 0; font-size: clamp(42px, 7vw, 78px); font-weight: 800; line-height: 1.28; letter-spacing: -.075em; }
+    h1 .accent { color: #e6bd84; }
+    h1 .english { display: block; margin-top: 13px; color: rgba(255,253,247,.73); font: 600 clamp(11px, 1.5vw, 14px)/1.5 var(--display); letter-spacing: .2em; }
+    .hero-copy { margin: 24px 0 31px; color: rgba(255,253,247,.88); font-size: 13px; line-height: 2.1; }
+    .hero-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+    .button {
+      display: inline-flex;
+      min-height: 47px;
+      align-items: center;
+      justify-content: center;
+      gap: 13px;
+      padding: 0 19px;
+      border: 1px solid var(--green);
+      border-radius: 2px;
+      background: var(--green);
+      color: #fffdf7;
+      font-size: 11px;
+      font-weight: 700;
+      transition: transform .2s, background .2s;
+    }
+    .button:hover { transform: translateY(-2px); background: #274c39; }
+    .button.outline { border-color: rgba(255,253,247,.7); background: transparent; color: #fffdf7; }
+    .button.outline:hover { background: rgba(255,255,255,.12); }
+    .button .arrow { font: 700 17px/1 var(--display); }
+    .hero-note { position: absolute; right: 0; bottom: 69px; color: rgba(255,253,247,.75); font: 600 10px/1.6 var(--display); letter-spacing: .14em; writing-mode: vertical-rl; }
+
+    .intro-strip { border-bottom: 1px solid var(--line); background: var(--panel); }
+    .intro-row { display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 20px; }
+    .intro-row strong { color: var(--green); font-size: 12px; }
+    .intro-row p { margin: 0; color: var(--muted); font-size: 11px; line-height: 1.8; text-align: right; }
+    section { padding: 94px 0; }
+    .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 35px; }
+    h2 { margin: 14px 0 0; font-size: clamp(29px, 4vw, 42px); font-weight: 800; letter-spacing: -.06em; line-height: 1.4; }
+    .section-heading p { max-width: 380px; margin: 0 0 4px; color: var(--muted); font-size: 11px; line-height: 2; }
+
+    .spots { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .spot {
+      display: grid;
+      min-height: 245px;
+      grid-template-columns: .88fr 1.12fr;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .spot:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(38,59,50,.08); }
+    .spot-image { min-height: 100%; background: var(--image) center / cover; }
+    .spot-content { display: flex; flex-direction: column; align-items: flex-start; padding: 24px 22px; }
+    .spot-no { color: var(--orange); font: 700 10px/1 var(--display); letter-spacing: .13em; }
+    .spot h3 { margin: 11px 0 8px; font-size: 18px; font-weight: 800; letter-spacing: -.04em; line-height: 1.5; }
+    .spot p { margin: 0 0 15px; color: var(--muted); font-size: 10px; line-height: 1.9; }
+    .spot-link { margin-top: auto; color: var(--green); font-size: 10px; font-weight: 700; }
+    .spot-link span { padding-left: 5px; font-size: 14px; }
+    .spot-links { display: flex; flex-direction: column; gap: 7px; margin-top: auto; }
+    .spot-links .spot-link { margin-top: 0; }
+    .notice { margin: 19px 0 0; color: var(--muted); font-size: 10px; line-height: 1.9; }
+
+    .route { background: var(--light-green); }
+    .route-grid { display: grid; grid-template-columns: .82fr 1.18fr; align-items: center; gap: 60px; }
+    .route-copy h2 { margin-bottom: 15px; }
+    .route-copy > p { max-width: 430px; margin: 0 0 24px; color: #606f62; font-size: 11px; line-height: 2.1; }
+    .route-list { margin: 0; padding: 0; list-style: none; }
+    .route-list li { display: grid; grid-template-columns: 35px 1fr; gap: 13px; padding: 17px 0; border-top: 1px solid rgba(52,99,76,.2); }
+    .route-list li:last-child { border-bottom: 1px solid rgba(52,99,76,.2); }
+    .route-number { color: var(--orange); font: 700 11px/1.8 var(--display); }
+    .route-list strong { display: block; font-size: 12px; }
+    .route-list span:last-child { display: block; margin-top: 3px; color: #68756a; font-size: 10px; line-height: 1.7; }
+    .route-photo { position: relative; padding: 0 0 22px 22px; }
+    .route-photo::before { position: absolute; inset: 22px 22px 0 0; border: 1px solid var(--green); content: ""; }
+    .route-photo img { position: relative; display: block; width: 100%; aspect-ratio: 1.2; object-fit: cover; }
+    .photo-caption { position: absolute; right: -10px; bottom: 40px; padding: 11px 14px; background: var(--green); color: #fffdf7; font: 700 10px/1 var(--display); letter-spacing: .08em; transform: rotate(-3deg); }
+
+    .access { padding-top: 85px; }
+    .access-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 25px; }
+    .access-panel { padding: 28px; border: 1px solid var(--line); background: var(--panel); }
+    .access-panel h3 { margin: 0 0 17px; font-size: 18px; }
+    .detail { display: grid; grid-template-columns: 83px 1fr; gap: 12px; padding: 13px 0; border-top: 1px solid var(--line); font-size: 10px; line-height: 1.8; }
+    .detail dt { color: var(--muted); }
+    .detail dd { margin: 0; }
+    .map-panel {
+      display: flex;
+      min-height: 280px;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background:
+        linear-gradient(34deg, transparent 47%, rgba(52,99,76,.12) 48%, rgba(52,99,76,.12) 49%, transparent 50%),
+        linear-gradient(145deg, transparent 42%, rgba(52,99,76,.1) 43%, rgba(52,99,76,.1) 45%, transparent 46%),
+        linear-gradient(90deg, transparent 49%, rgba(215,121,77,.18) 50%, rgba(215,121,77,.18) 52%, transparent 53%),
+        #e9e7dc;
+    }
+    .map-pin { display: grid; width: 142px; height: 142px; place-items: center; border: 1px solid rgba(52,99,76,.35); border-radius: 50%; background: rgba(255,253,247,.92); text-align: center; }
+    .map-pin span { color: var(--orange); font-size: 22px; }
+    .map-pin strong { display: block; margin: 7px 0 3px; font-size: 13px; }
+    .map-pin small { color: var(--muted); font: 600 9px/1 var(--display); letter-spacing: .08em; }
+    .map-link { display: inline-block; margin-top: 11px; color: var(--green); font-size: 10px; font-weight: 700; }
+
+    footer { padding: 26px 0; border-top: 1px solid var(--line); }
+    .footer-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .footer-brand { color: var(--green); }
+    .footer-brand .brand-mark { border-color: var(--green); color: var(--green); }
+    .footer-row p { margin: 0; color: var(--muted); font: 10px/1.8 var(--display); }
+    .footer-note { color: var(--muted); font-size: 9px; text-align: right; }
+
+    @media (max-width: 820px) {
+      .nav-links { gap: 17px; }
+      .spot { grid-template-columns: .8fr 1.2fr; }
+      .route-grid { gap: 35px; }
+    }
+    @media (max-width: 680px) {
+      .wrap { width: min(100% - 36px, 560px); }
+      .nav { height: 68px; }
+      .nav-links { position: absolute; top: 67px; right: 0; left: 0; display: none; align-items: stretch; gap: 0; padding: 10px 18px 18px; border-bottom: 1px solid rgba(255,255,255,.25); background: #263b32; }
+      .nav-links.open { display: flex; flex-direction: column; }
+      .nav-links a { padding: 13px 5px; border-bottom: 1px solid rgba(255,255,255,.14); }
+      .nav-links .nav-cta { margin-top: 11px; border: 1px solid rgba(255,255,255,.55); text-align: center; }
+      .menu-toggle { display: grid; width: 40px; height: 40px; place-items: center; border: 1px solid rgba(255,255,255,.5); border-radius: 2px; background: transparent; color: #fffdf7; font-size: 20px; }
+      .hero { min-height: 660px; background-position: 58% center; }
+      .hero::after { position: absolute; inset: 0; background: rgba(28,48,39,.17); content: ""; }
+      .hero-content { padding-top: 48px; }
+      .hero-copy { font-size: 11px; }
+      .hero-note { display: none; }
+      .intro-row { min-height: 82px; align-items: flex-start; flex-direction: column; justify-content: center; gap: 5px; padding-block: 14px; }
+      .intro-row p { text-align: left; }
+      section { padding: 72px 0; }
+      .section-heading { display: block; }
+      .section-heading p { margin-top: 12px; }
+      .spots { grid-template-columns: 1fr; gap: 13px; }
+      .spot { min-height: 220px; }
+      .spot-content { padding: 20px 17px; }
+      .spot h3 { font-size: 16px; }
+      .route-grid { grid-template-columns: 1fr; gap: 33px; }
+      .route-photo { width: calc(100% - 12px); }
+      .access { padding-top: 0; }
+      .access-grid { grid-template-columns: 1fr; gap: 14px; }
+      .footer-row { align-items: flex-start; flex-direction: column; }
+      .footer-note { text-align: left; }
+    }
+    @media (max-width: 390px) {
+      .spot { grid-template-columns: .72fr 1.28fr; }
+      .spot-content { padding: 17px 13px; }
+      .spot p { font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav class="nav wrap" aria-label="メインナビゲーション">
+      <a class="brand" href="#top" aria-label="おおくぼ日和 トップ">
+        <span class="brand-mark">O</span>
+        <span>おおくぼ<span>日和</span></span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-expanded="false" aria-controls="nav-links">☰</button>
+      <div class="nav-links" id="nav-links">
+        <a href="#spots">見どころ</a>
+        <a href="#route">街歩きコース</a>
+        <a href="#access">アクセス</a>
+        <a class="nav-cta" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E5%A4%A7%E4%B9%85%E4%BF%9D%E9%A7%85" target="_blank" rel="noopener noreferrer">地図を見る ↗</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="top">
+      <div class="wrap hero-content">
+        <div class="hero-tag"><span>✦</span> NARASHINO, CHIBA · LOCAL WALK</div>
+        <h1>大久保で、<br><span class="accent">街を楽しむ。</span><span class="english">A SMALL TOWN, A LOVELY DAY.</span></h1>
+        <p class="hero-copy">商店街をのぞいて、緑のある場所でひと休み。<br>千葉・習志野の大久保を、自分のペースで歩いてみませんか。</p>
+        <div class="hero-actions">
+          <a class="button" href="#spots">見どころをチェック <span class="arrow">↓</span></a>
+          <a class="button outline" href="#route">おすすめコース <span class="arrow">→</span></a>
+        </div>
+      </div>
+      <div class="hero-note">TAKE A LITTLE WALK AROUND OKUBO</div>
+    </section>
+
+    <div class="intro-strip">
+      <div class="wrap intro-row">
+        <strong>京成大久保駅から、のんびり街歩き。</strong>
+        <p>商店街と大学のある、習志野らしい日常に出会うエリアです。</p>
+      </div>
+    </div>
+
+    <section id="spots">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><span class="eyebrow">PLACES TO VISIT</span><h2>大久保の、気になるところ。</h2></div>
+          <p>駅の近くを中心に、散策で立ち寄りやすいスポットをピックアップしました。</p>
+        </div>
+        <div class="spots">
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="緑の並木道のイメージ" style="--image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&amp;fit=crop&amp;w=700&amp;q=80')"></div>
+            <div class="spot-content">
+              <span class="spot-no">01 / SHOPPING STREET</span>
+              <h3>大久保商店街<br>「ゆうロード」</h3>
+              <p>駅から北へ続く学園通り。昔ながらの喫茶店や理容室、本屋に、新しい飲食店やスポーツ用品店が並びます。習志野スポーツではユニフォームの刺しゅう・マーキングも相談できます。中央のお休み処でひと息ついたり、夏祭りやハロウィン、フリーマーケットの日に訪れるのもおすすめです。</p>
+              <div class="spot-links">
+                <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E5%A4%A7%E4%B9%85%E4%BF%9D%E9%A7%85%20%E3%82%86%E3%81%86%E3%83%AD%E3%83%BC%E3%83%89" target="_blank" rel="noopener noreferrer">地図で場所を見る <span>↗</span></a>
+                <a class="spot-link" href="https://www.shopland-n.com/mall/ookubo.html" target="_blank" rel="noopener noreferrer">商店街の店舗情報を見る <span>↗</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="明るい公共施設のイメージ" style="--image: url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&amp;fit=crop&amp;w=700&amp;q=80')"></div>
+            <div class="spot-content">
+              <span class="spot-no">02 / COMMUNITY</span>
+              <h3>プラッツ習志野</h3>
+              <p>京成大久保駅前の生涯学習複合施設。図書館やホールなどが集まる、地域の交流拠点です。</p>
+              <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%97%E3%83%A9%E3%83%83%E3%83%84%E7%BF%92%E5%BF%97%E9%87%8E" target="_blank" rel="noopener noreferrer">地図で場所を見る <span>↗</span></a>
+            </div>
+          </article>
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="大学の建物のイメージ" style="--image: url('https://images.unsplash.com/photo-1562774053-701939374585?auto=format&amp;fit=crop&amp;w=700&amp;q=80')"></div>
+            <div class="spot-content">
+              <span class="spot-no">03 / CAMPUS TOWN</span>
+              <h3>大学のある街の風景</h3>
+              <p>日本大学生産工学部や東邦大学のキャンパスがある大久保周辺。学生街ならではの活気を感じて。</p>
+              <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%97%A5%E6%9C%AC%E5%A4%A7%E5%AD%A6%E7%94%9F%E7%94%A3%E5%B7%A5%E5%AD%A6%E9%83%A8%20%E6%B4%A5%E7%94%B0%E6%B2%BC%E3%82%AD%E3%83%A3%E3%83%B3%E3%83%91%E3%82%B9" target="_blank" rel="noopener noreferrer">周辺を地図で見る <span>↗</span></a>
+            </div>
+          </article>
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="木漏れ日の公園のイメージ" style="--image: url('https://images.unsplash.com/photo-1472396961693-142e6e269027?auto=format&amp;fit=crop&amp;w=700&amp;q=80')"></div>
+            <div class="spot-content">
+              <span class="spot-no">04 / SLOW TIME</span>
+              <h3>公園やカフェでひと休み</h3>
+              <p>散策の合間は、近くの公園や気になるお店へ。予定を詰めこまず、ゆったり過ごすのもおすすめ。</p>
+              <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%85%AC%E5%9C%92%20%E3%82%AB%E3%83%95%E3%82%A7%20%E4%BA%AC%E6%88%90%E5%A4%A7%E4%B9%85%E4%BF%9D%E9%A7%85" target="_blank" rel="noopener noreferrer">周辺を地図で見る <span>↗</span></a>
+            </div>
+          </article>
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="温浴施設のイメージ" style="--image: linear-gradient(145deg, #d7e2d7, #8da99a)"></div>
+            <div class="spot-content">
+              <span class="spot-no">05 / SPA &amp; RELAXATION</span>
+              <h3>スパリゾート<br>菜々の湯（ななのゆ）</h3>
+              <p>習志野市本大久保1-1-1にある温浴施設。7種類のお風呂と2種類のサウナに加え、岩盤温浴「Stone Spa 7」や食事処・カフェもあり、散策のあとにゆっくり過ごせます。京成大久保駅から車で約3分です。</p>
+              <div class="spot-links">
+                <a class="spot-link" href="http://www.nananoyu.jp/" target="_blank" rel="noopener noreferrer">施設の公式サイトを見る <span>↗</span></a>
+                <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%8F%9C%E3%80%85%E3%81%AE%E6%B9%AF%20%E7%BF%92%E5%BF%97%E9%87%8E%E5%B8%82%E6%9C%AC%E5%A4%A7%E4%B9%85%E4%BF%9D1-1-1" target="_blank" rel="noopener noreferrer">地図で場所を見る <span>↗</span></a>
+              </div>
+            </div>
+          </article>
+          <article class="spot">
+            <div class="spot-image" role="img" aria-label="神社の境内のイメージ" style="--image: linear-gradient(145deg, #d8c8a9, #778b68)"></div>
+            <div class="spot-content">
+              <span class="spot-no">06 / LOCAL SHRINE</span>
+              <h3>誉田八幡神社<br>（こんだはちまんじんじゃ）</h3>
+              <p>京成大久保駅から徒歩約10分、大久保4丁目にある地域の神社です。大久保新田の開拓にあたり、延宝年間（1673〜1680年）に誉田八幡宮から勧請されたと伝わります。9月の例大祭では、地域に受け継がれる祭りの雰囲気にも触れられます。</p>
+              <a class="spot-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%AA%89%E7%94%B0%E5%85%AB%E5%B9%A1%E7%A5%9E%E7%A4%BE%20%E7%BF%92%E5%BF%97%E9%87%8E%E5%B8%82%E5%A4%A7%E4%B9%85%E4%BF%9D" target="_blank" rel="noopener noreferrer">地図で場所を見る <span>↗</span></a>
+            </div>
+          </article>
+        </div>
+        <p class="notice">※写真はイメージです。施設の利用条件・営業時間・休館日などは、お出かけ前に各施設の公式案内をご確認ください。</p>
+      </div>
+    </section>
+
+    <section class="route" id="route">
+      <div class="wrap route-grid">
+        <div class="route-copy">
+          <span class="eyebrow">A GENTLE WALK</span>
+          <h2>駅からはじめる、<br>大久保さんぽ。</h2>
+          <p>京成大久保駅を起点に、商店街や駅前の施設をめぐる気軽なコース。お店での寄り道も楽しみながら、自分のペースで歩いてみてください。</p>
+          <ol class="route-list">
+            <li><span class="route-number">01</span><div><strong>京成大久保駅からスタート</strong><span>駅周辺をチェックして、街歩きへ。</span></div></li>
+            <li><span class="route-number">02</span><div><strong>ゆうロードを散策</strong><span>喫茶店や本屋、スポーツ店などをのぞき、中央のお休み処でひと休み。</span></div></li>
+            <li><span class="route-number">03</span><div><strong>誉田八幡神社にお参り</strong><span>境内を静かに歩き、地域の歴史に触れてみよう。</span></div></li>
+            <li><span class="route-number">04</span><div><strong>プラッツ習志野へ</strong><span>施設の催しや開館情報を確認して立ち寄りを。</span></div></li>
+            <li><span class="route-number">05</span><div><strong>カフェや公園でひと休み</strong><span>周辺でお気に入りの過ごし方を探してみて。</span></div></li>
+          </ol>
+        </div>
+        <div class="route-photo">
+          <img src="https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&amp;fit=crop&amp;w=1100&amp;q=85" alt="緑に囲まれた穏やかな風景">
+          <span class="photo-caption">WALK AT YOUR OWN PACE ✳</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="access" id="access">
+      <div class="wrap">
+        <div class="section-heading">
+          <div><span class="eyebrow">GETTING HERE</span><h2>大久保へのアクセス。</h2></div>
+          <p>駅を起点に、周辺の見どころをめぐるのがおすすめです。</p>
+        </div>
+        <div class="access-grid">
+          <div class="access-panel">
+            <h3>京成大久保駅</h3>
+            <dl>
+              <div class="detail"><dt>所在地</dt><dd>千葉県習志野市大久保</dd></div>
+              <div class="detail"><dt>最寄り駅</dt><dd>京成本線「京成大久保」駅</dd></div>
+              <div class="detail"><dt>街歩き</dt><dd>駅周辺から商店街・公共施設へ</dd></div>
+              <div class="detail"><dt>お出かけ前に</dt><dd>交通機関・各施設の最新情報をご確認ください。</dd></div>
+            </dl>
+            <a class="map-link" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E5%A4%A7%E4%B9%85%E4%BF%9D%E9%A7%85" target="_blank" rel="noopener noreferrer">Google マップで開く ↗</a>
+          </div>
+          <a class="map-panel" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E5%A4%A7%E4%B9%85%E4%BF%9D%E9%A7%85" target="_blank" rel="noopener noreferrer" aria-label="京成大久保駅周辺の地図をGoogle マップで開く">
+            <div class="map-pin"><div><span>✳</span><strong>京成大久保</strong><small>MAP &amp; DIRECTIONS</small></div></div>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-row">
+      <a class="brand footer-brand" href="#top" aria-label="おおくぼ日和 トップ"><span class="brand-mark">O</span><span>おおくぼ<span>日和</span></span></a>
+      <p>© おおくぼ日和 · NARASHINO, CHIBA</p>
+      <div class="footer-note">※写真はイメージです。掲載情報はお出かけ前にご確認ください。</div>
+    </div>
+  </footer>
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const menu = document.querySelector(".nav-links");
+    menuButton.addEventListener("click", () => {
+      const isOpen = menu.classList.toggle("open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute("aria-label", isOpen ? "メニューを閉じる" : "メニューを開く");
+      menuButton.textContent = isOpen ? "×" : "☰";
+    });
+    menu.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => {
+        menu.classList.remove("open");
+        menuButton.setAttribute("aria-expanded", "false");
+        menuButton.setAttribute("aria-label", "メニューを開く");
+        menuButton.textContent = "☰";
+      });
+    });
+  </script>
+</body>
+</html>
+
